@@ -130,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sunIcon.style.display = 'block';
         }
         
-        // Show instruction tooltip on very first visit
-        if (!localStorage.getItem('theme-tooltip-shown')) {
+        // Show instruction tooltip once per session
+        if (!sessionStorage.getItem('theme-tooltip-shown')) {
             const wrapper = document.getElementById('themeToggleWrapper');
             if (wrapper) {
                 const tooltip = document.createElement('div');
@@ -145,9 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => tooltip.remove(), 1000);
                 }, 4000);
                 
-                // Ensure it never shows again
-                localStorage.setItem('theme-tooltip-shown', 'true');
-                localStorage.setItem('theme', 'dark'); // also initialize theme safely
+                // Ensure it doesn't show again this session
+                sessionStorage.setItem('theme-tooltip-shown', 'true');
+                localStorage.setItem('theme', 'dark'); // initialize theme safely
             }
         }
     } else {
