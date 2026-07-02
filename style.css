@@ -621,54 +621,15 @@ body.dark-mode .about-grid {
     border-color: var(--color-primary) !important;
 }
 
-/* SVG Path Tracing for Keywords */
-.svg-trace {
-    height: 1.1em; /* Scales with surrounding h1 font size */
-    width: auto;
-    vertical-align: -0.15em; /* Aligns SVG text baseline with HTML text */
-    overflow: visible;
-    display: inline-block;
+/* Highlight text (H1) - Premium Delight */
+.highlight-text {
+    color: var(--color-primary);
+    font-weight: 700;
+    transition: text-shadow var(--transition-normal), color var(--transition-normal);
 }
-
-body.dark-mode .svg-trace text {
-    fill: transparent;
-    stroke: #00f0ff; /* Intense Framer Cyan */
-    stroke-width: 2px;
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: svgPathTrace 1.5s cubic-bezier(0.25, 1, 0.5, 1) both;
-}
-
-/* Light mode fallback */
-body:not(.dark-mode) .svg-trace text {
-    fill: var(--color-primary);
-    stroke: none;
-}
-
-/* Sequence the trace animation */
-#trace-1 { animation-delay: 0.2s; }
-#trace-2 { animation-delay: 1.2s; }
-#trace-3 { animation-delay: 2.2s; }
-
-@keyframes svgPathTrace {
-    0% {
-        stroke-dashoffset: 800;
-        fill: transparent;
-        stroke: #00f0ff;
-        filter: drop-shadow(0 0 0px rgba(0, 240, 255, 0));
-    }
-    40% {
-        stroke-dashoffset: 0;
-        fill: transparent;
-        stroke: #00f0ff;
-        filter: drop-shadow(0 0 12px rgba(0, 240, 255, 1));
-    }
-    100% {
-        stroke-dashoffset: 0;
-        fill: #e0f2fe; /* Final soft bloom */
-        stroke: rgba(0, 240, 255, 0);
-        filter: drop-shadow(0 0 8px var(--color-secondary)) drop-shadow(0 0 15px var(--color-secondary)) drop-shadow(0 0 30px var(--color-primary));
-    }
+body.dark-mode .highlight-text {
+    color: #e0f2fe; /* Light blue/white to make the text itself pop */
+    text-shadow: 0 0 8px var(--color-secondary), 0 0 15px var(--color-secondary), 0 0 30px var(--color-primary);
 }
 
 /* Tooltip for theme toggle */
