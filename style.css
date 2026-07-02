@@ -628,29 +628,44 @@ body.dark-mode .about-grid {
     transition: text-shadow var(--transition-normal), color var(--transition-normal);
 }
 body.dark-mode .highlight-text {
-    /* The laser-trace wipe effect */
-    background: linear-gradient(to right, #e0f2fe 0%, #e0f2fe 100%);
-    background-size: 0% 100%;
+    /* The glossy bead-trace effect mimicking Framer rim glow */
+    background: linear-gradient(
+        90deg,
+        #e0f2fe 0%,
+        #e0f2fe 40%,
+        #ffffff 45%,
+        #00f0ff 50%,
+        transparent 55%,
+        transparent 100%
+    );
+    background-size: 300% 100%;
     background-repeat: no-repeat;
     -webkit-background-clip: text;
     background-clip: text;
-    color: rgba(255, 255, 255, 0.1); /* Dim base text before trace */
-    animation: laserTrace 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    color: rgba(255, 255, 255, 0.05); /* Dim base text */
+    
+    /* 'both' ensures it starts dim during the delay, and stays glowing after */
+    animation: laserBeadTrace 1.5s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 
-@keyframes laserTrace {
+/* Sequence the trace animation */
+#trace-1 { animation-delay: 0.2s; }
+#trace-2 { animation-delay: 1.2s; }
+#trace-3 { animation-delay: 2.2s; }
+
+@keyframes laserBeadTrace {
     0% {
-        background-size: 0% 100%;
+        background-position: 100% 0;
         text-shadow: none;
     }
-    40% {
-        background-size: 100% 100%;
-        color: rgba(255, 255, 255, 0.1);
-        text-shadow: 0 0 10px #00f0ff; /* Sharp leading edge glow */
+    60% {
+        /* Flash of the intense cyan bead passing over */
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.8); 
     }
     100% {
-        background-size: 100% 100%;
-        color: #e0f2fe; /* Final bloom */
+        background-position: 0% 0;
+        color: transparent; 
+        /* Final soft bloom exactly matching Framer reference */
         text-shadow: 0 0 8px var(--color-secondary), 0 0 15px var(--color-secondary), 0 0 30px var(--color-primary);
     }
 }
