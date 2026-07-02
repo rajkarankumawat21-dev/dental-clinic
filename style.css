@@ -276,7 +276,7 @@ body.dark-mode .header.scrolled {
     display: inline-block;
     padding: 6px 16px;
     background-color: var(--color-primary-light);
-    color: var(--color-primary-dark);
+    color: #ffffff;
     border-radius: var(--radius-full);
     font-weight: 600;
     font-size: var(--text-sm);
@@ -638,7 +638,7 @@ body.dark-mode .highlight-text {
     top: 55px;
     right: -10px;
     background: var(--color-primary-light);
-    color: #0f172a;
+    color: #ffffff;
     padding: 8px 14px;
     border-radius: 8px;
     font-size: 0.85rem;
