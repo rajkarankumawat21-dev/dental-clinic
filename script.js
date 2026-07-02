@@ -131,21 +131,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Show instruction tooltip on very first visit
-        if (!currentTheme && themeToggleBtn) {
-            themeToggleBtn.style.position = 'relative';
-            const tooltip = document.createElement('div');
-            tooltip.className = 'theme-tooltip';
-            tooltip.innerHTML = 'Switch to Light Mode ☀️';
-            themeToggleBtn.appendChild(tooltip);
-            
-            // Fade out after 4 seconds
-            setTimeout(() => {
-                tooltip.classList.add('fade-out');
-                setTimeout(() => tooltip.remove(), 1000);
-            }, 4000);
-            
-            // Set theme to dark so tooltip doesn't show again on reload
-            localStorage.setItem('theme', 'dark');
+        if (!localStorage.getItem('theme-tooltip-shown')) {
+            const wrapper = document.getElementById('themeToggleWrapper');
+            if (wrapper) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'theme-tooltip';
+                tooltip.innerHTML = 'Switch to Light Mode ☀️';
+                wrapper.appendChild(tooltip);
+                
+                // Fade out after 4 seconds
+                setTimeout(() => {
+                    tooltip.classList.add('fade-out');
+                    setTimeout(() => tooltip.remove(), 1000);
+                }, 4000);
+                
+                // Ensure it never shows again
+                localStorage.setItem('theme-tooltip-shown', 'true');
+                localStorage.setItem('theme', 'dark'); // also initialize theme safely
+            }
         }
     } else {
         if (moonIcon && sunIcon) {
