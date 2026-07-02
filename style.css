@@ -621,7 +621,16 @@ body.dark-mode .about-grid {
     border-color: var(--color-primary) !important;
 }
 
-/* Highlight text (H1) - Premium Delight (Reverted) */
+/* Highlight text (H1) - Premium Delight */
+.highlight-text {
+    color: var(--color-primary);
+    font-weight: 700;
+    transition: text-shadow var(--transition-normal), color var(--transition-normal);
+}
+body.dark-mode .highlight-text {
+    color: var(--color-primary-light);
+    text-shadow: 0 0 15px rgba(123, 153, 181, 0.6), 0 0 30px rgba(123, 153, 181, 0.3);
+}
 
 /* Navbar Theme Toggle */
 .nav-theme-toggle {
