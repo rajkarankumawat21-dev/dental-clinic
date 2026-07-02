@@ -628,8 +628,66 @@ body.dark-mode .about-grid {
     transition: text-shadow var(--transition-normal), color var(--transition-normal);
 }
 body.dark-mode .highlight-text {
-    color: #e0f2fe; /* Light blue/white to make the text itself pop */
-    text-shadow: 0 0 8px var(--color-secondary), 0 0 15px var(--color-secondary), 0 0 30px var(--color-primary);
+    /* The laser-trace wipe effect */
+    background: linear-gradient(to right, #e0f2fe 0%, #e0f2fe 100%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: rgba(255, 255, 255, 0.1); /* Dim base text before trace */
+    animation: laserTrace 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes laserTrace {
+    0% {
+        background-size: 0% 100%;
+        text-shadow: none;
+    }
+    40% {
+        background-size: 100% 100%;
+        color: rgba(255, 255, 255, 0.1);
+        text-shadow: 0 0 10px #00f0ff; /* Sharp leading edge glow */
+    }
+    100% {
+        background-size: 100% 100%;
+        color: #e0f2fe; /* Final bloom */
+        text-shadow: 0 0 8px var(--color-secondary), 0 0 15px var(--color-secondary), 0 0 30px var(--color-primary);
+    }
+}
+
+/* Tooltip for theme toggle */
+.theme-tooltip {
+    position: absolute;
+    top: 55px;
+    right: -10px;
+    background: var(--color-primary-light);
+    color: #0f172a;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    animation: floatTooltip 2s ease-in-out infinite;
+}
+.theme-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: 20px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid var(--color-primary-light);
+}
+.theme-tooltip.fade-out {
+    opacity: 0;
+}
+@keyframes floatTooltip {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
 }
 
 /* Navbar Theme Toggle */

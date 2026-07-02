@@ -120,11 +120,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const moonIcon = document.querySelector('.moon-icon');
     const sunIcon = document.querySelector('.sun-icon');
     
-    if (localStorage.getItem('theme') === 'dark') {
+    // Force Dark Mode by Default
+    const currentTheme = localStorage.getItem('theme');
+    
+    if (currentTheme !== 'light') {
         document.body.classList.add('dark-mode');
         if (moonIcon && sunIcon) {
             moonIcon.style.display = 'none';
             sunIcon.style.display = 'block';
+        }
+        
+        // Show instruction tooltip on very first visit
+        if (!currentTheme && themeToggleBtn) {
+            themeToggleBtn.style.position = 'relative';
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.innerHTML = 'Switch to Light Mode ☀️';
+            themeToggleBtn.appendChild(tooltip);
+            
+            // Fade out after 4 seconds
+            setTimeout(() => {
+                tooltip.classList.add('fade-out');
+                setTimeout(() => tooltip.remove(), 1000);
+            }, 4000);
+            
+            // Set theme to dark so tooltip doesn't show again on reload
+            localStorage.setItem('theme', 'dark');
+        }
+    } else {
+        if (moonIcon && sunIcon) {
+            moonIcon.style.display = 'block';
+            sunIcon.style.display = 'none';
         }
     }
 
